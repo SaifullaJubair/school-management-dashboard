@@ -4,21 +4,21 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import { Helmet } from 'react-helmet-async';
-import useToken from '../../hooks/useToken';
+// import useToken from '../../hooks/useToken';
 
 const Login = () => {
    const { signIn, signInGoogle } = useContext(AuthContext)
    const { register, formState: { errors }, handleSubmit } = useForm();
    const [loginError, setLoginError] = useState('')
    const [loginUserEmail, setLoginUserEmail] = useState('');
-   const [token] = useToken(loginUserEmail);
    const location = useLocation()
    const navigate = useNavigate()
    const from = location.state?.from?.pathname || '/'
 
-   if (token) {
-      navigate(from, { replace: true })
-   }
+   // const [token] = useToken(loginUserEmail);
+   // if (token) {
+   //    navigate(from, { replace: true })
+   // }
    const handleLogin = (data) => {
       // console.log(data)
       setLoginError('')
@@ -26,6 +26,7 @@ const Login = () => {
          .then(res => {
             const user = res.user
             // console.log(user);
+            navigate(from, { replace: true })
             setLoginUserEmail(data.email)
             toast.success('Successfully login')
 

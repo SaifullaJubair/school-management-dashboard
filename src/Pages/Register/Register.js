@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
-import useToken from '../../hooks/useToken';
+// import useToken from '../../hooks/useToken';
 
 const Register = () => {
    const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,11 +12,13 @@ const Register = () => {
    const { createUser, updateUser } = useContext(AuthContext);
    const [signUpError, setSignUPError] = useState('')
    const [createdUserEmail, setCreatedUserEmail] = useState('')
-   const [token] = useToken(createdUserEmail)
+   const location = useLocation()
+   const from = location.state?.from?.pathname || '/'
    const navigate = useNavigate()
-   if (token) {
-      navigate('/')
-   }
+   // const [token] = useToken(createdUserEmail)
+   // if (token) {
+   //    navigate('/')
+   // }
 
 
 
@@ -27,6 +29,7 @@ const Register = () => {
          .then(result => {
             const user = result.user;
             // console.log(user);
+            navigate(from, { replace: true })
             toast.success('User Created Successfully.')
 
             const userInfo = {
@@ -94,8 +97,8 @@ const Register = () => {
                </div>
                <div className='flex flex-col mt-4'>
                   <h2>Role:</h2>
-                  <div><input type="radio" className="radio radio-primary" checked {...register('role')} value="buyer" /> Buyer</div>
-                  <div><input type="radio" className="radio radio-primary" {...register('role')} value="seller" /> Seller</div>
+                  <div><input type="radio" className="radio radio-primary" checked {...register('role')} value="student" /> Student</div>
+                  <div><input type="radio" className="radio radio-primary" {...register('role')} value="teacher" /> Teacher</div>
                </div>
                <input
                   type="submit"

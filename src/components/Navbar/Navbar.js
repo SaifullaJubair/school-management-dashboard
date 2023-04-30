@@ -14,7 +14,7 @@ const Navbar = () => {
 
 
    return (
-      <div data-theme="wireframe">
+      <div>
          <div className="navbar bg-base-100 py-5">
             <div className="navbar-start">
                <div className="dropdown">
@@ -43,7 +43,7 @@ const Navbar = () => {
                </div>
                <Link to='/' className="btn btn-ghost normal-case text-xl">
                   <div className='flex items-center ml-2 font-bold lg:text-3xl text-base'>
-                     <img className='lg:w-14 w-10 mr-2' src='https://i.ibb.co/1R5TbcM/image.png' alt="" />
+                     <img className='lg:w-14 w-10 mr-2' src='https://i.ibb.co/qkndsK0/icons8-school-64.png' alt="" />
                      <h3 className=''> SJSchool</h3>
                   </div>
                </Link>
